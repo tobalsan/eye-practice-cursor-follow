@@ -211,6 +211,13 @@ class EyeTrainingApp {
     initPosition() {
         this.position.x = this.bounds.width / 2;
         this.position.y = this.bounds.height / 2;
+        
+        if (this.settings.turnType === 'curved') {
+            const angle = Math.random() * Math.PI * 2;
+            this.velocity.x = Math.cos(angle) * this.settings.speed;
+            this.velocity.y = Math.sin(angle) * this.settings.speed;
+        }
+        
         this.updateShapePosition();
     }
     
@@ -218,13 +225,15 @@ class EyeTrainingApp {
         this.target.x = Math.random() * this.bounds.width;
         this.target.y = Math.random() * this.bounds.height;
         
-        const dx = this.target.x - this.position.x;
-        const dy = this.target.y - this.position.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance > 0) {
-            this.velocity.x = (dx / distance) * this.settings.speed;
-            this.velocity.y = (dy / distance) * this.settings.speed;
+        if (this.settings.turnType === 'angular') {
+            const dx = this.target.x - this.position.x;
+            const dy = this.target.y - this.position.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance > 0) {
+                this.velocity.x = (dx / distance) * this.settings.speed;
+                this.velocity.y = (dy / distance) * this.settings.speed;
+            }
         }
         
         this.turnDuration = this.settings.minFreq + Math.random() * (this.settings.maxFreq - this.settings.minFreq);
@@ -280,21 +289,29 @@ class EyeTrainingApp {
         if (this.position.x - shapeHalfSize < 0) {
             this.position.x = shapeHalfSize;
             this.velocity.x = Math.abs(this.velocity.x);
-            this.pickNewTarget();
+            if (this.settings.turnType === 'angular') {
+                this.pickNewTarget();
+            }
         } else if (this.position.x + shapeHalfSize > this.bounds.width) {
             this.position.x = this.bounds.width - shapeHalfSize;
             this.velocity.x = -Math.abs(this.velocity.x);
-            this.pickNewTarget();
+            if (this.settings.turnType === 'angular') {
+                this.pickNewTarget();
+            }
         }
         
         if (this.position.y - shapeHalfSize < 0) {
             this.position.y = shapeHalfSize;
             this.velocity.y = Math.abs(this.velocity.y);
-            this.pickNewTarget();
+            if (this.settings.turnType === 'angular') {
+                this.pickNewTarget();
+            }
         } else if (this.position.y + shapeHalfSize > this.bounds.height) {
             this.position.y = this.bounds.height - shapeHalfSize;
             this.velocity.y = -Math.abs(this.velocity.y);
-            this.pickNewTarget();
+            if (this.settings.turnType === 'angular') {
+                this.pickNewTarget();
+            }
         }
         
         this.updateShapePosition();
