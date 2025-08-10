@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Eye Coordination Training</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="shape" class="shape circle"></div>
+        
+        <button id="settingsBtn" class="settings-btn" title="Settings">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 1.54l4.24 4.24M20.46 20.46l-4.24-4.24M1.54 20.46l4.24-4.24M23 12h-6m-6 0H1"></path>
+            </svg>
+        </button>
+        
+        <div id="settingsMenu" class="settings-menu hidden">
+            <div class="settings-header">
+                <h3>Settings</h3>
+                <button id="closeSettings" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="setting-item">
+                <label for="theme">Theme:</label>
+                <select id="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
+                <label for="size">Size (px):</label>
+                <input type="range" id="size" min="1" max="32" value="8">
+                <span id="sizeValue">8</span>
+            </div>
+            
+            <div class="setting-item">
+                <label for="shape">Shape:</label>
+                <select id="shape-select">
+                    <option value="circle">Circle</option>
+                    <option value="square">Square</option>
+                    <option value="cross">Cross</option>
+                    <option value="cursor">Cursor</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
+                <label for="opacity">Opacity (%):</label>
+                <input type="range" id="opacity" min="1" max="100" value="100">
+                <span id="opacityValue">100</span>
+            </div>
+            
+            <div class="setting-item">
+                <label for="speed">Speed (px/s):</label>
+                <input type="range" id="speed" min="96" max="1920" value="400">
+                <span id="speedValue">400</span>
+            </div>
+            
+            <div class="setting-item">
+                <label for="turnType">Turn Type:</label>
+                <select id="turnType">
+                    <option value="angular">Angular</option>
+                    <option value="curved">Curved</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
+                <label>Turn Frequency (s):</label>
+                <div class="frequency-inputs">
+                    <div>
+                        <label for="minFreq">Min:</label>
+                        <input type="number" id="minFreq" min="0.5" max="10" step="0.5" value="1.5">
+                    </div>
+                    <div>
+                        <label for="maxFreq">Max:</label>
+                        <input type="number" id="maxFreq" min="0.5" max="10" step="0.5" value="3">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-footer">
+                <button id="resetBtn">Reset to Defaults</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+#app.dark-theme {
+    background-color: #001a33;
+}
+
+.shape {
+    position: absolute;
+    background-color: black;
+    pointer-events: none;
+    will-change: transform;
+    transition: background-color 0.3s ease;
+}
+
+.dark-theme .shape {
+    background-color: white;
+}
+
+.shape.circle {
+    border-radius: 50%;
+}
+
+.shape.square {
+    border-radius: 0;
+}
+
+.shape.cross {
+    background-color: transparent !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shape.cross::before,
+.shape.cross::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+}
+
+.dark-theme .shape.cross::before,
+.dark-theme .shape.cross::after {
+    background-color: white;
+}
+
+.shape.cross::before {
+    width: 100%;
+    height: 2px;
+}
+
+.shape.cross::after {
+    width: 2px;
+    height: 100%;
+}
+
+.shape.cursor {
+    background-color: transparent !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.shape.cursor::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 8px 0 8px;
+    border-color: black transparent transparent transparent;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+}
+
+.dark-theme .shape.cursor::before {
+    border-color: white transparent transparent transparent;
+}
+
+.settings-btn {
+    position: fixed;
+    top: env(safe-area-inset-top, 16px);
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.dark-theme .settings-btn {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-btn:hover {
+    opacity: 0.8;
+}
+
+.settings-btn svg {
+    width: 100%;
+    height: 100%;
+    color: #333;
+}
+
+.dark-theme .settings-btn svg {
+    color: #fff;
+}
+
+.settings-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    min-width: 320px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 2000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dark-theme .settings-menu {
+    background: #1a2332;
+    color: white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.settings-menu.hidden {
+    display: none;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.dark-theme .settings-header {
+    border-bottom-color: #3a4352;
+}
+
+.settings-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.dark-theme .close-btn {
+    color: #ccc;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.setting-item {
+    margin-bottom: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.dark-theme .setting-item label {
+    color: #ccc;
+}
+
+.setting-item input[type="range"] {
+    width: calc(100% - 50px);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.setting-item input[type="number"] {
+    width: 80px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.dark-theme .setting-item input[type="number"] {
+    background: #2a3342;
+    border-color: #3a4352;
+    color: white;
+}
+
+.setting-item select {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+.dark-theme .setting-item select {
+    background: #2a3342;
+    border-color: #3a4352;
+    color: white;
+}
+
+.setting-item span {
+    display: inline-block;
+    width: 40px;
+    text-align: right;
+    font-size: 14px;
+    color: #666;
+}
+
+.dark-theme .setting-item span {
+    color: #aaa;
+}
+
+.frequency-inputs {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.frequency-inputs > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.frequency-inputs label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.settings-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.dark-theme .settings-footer {
+    border-top-color: #3a4352;
+}
+
+#resetBtn {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#resetBtn:hover {
+    background: #0056b3;
+}
+
+.dark-theme #resetBtn {
+    background: #0066cc;
+}
+
+.dark-theme #resetBtn:hover {
+    background: #0052a3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
