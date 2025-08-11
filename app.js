@@ -77,6 +77,7 @@ class EyeTrainingApp {
         this.resetBtn.addEventListener('click', () => this.resetToDefaults());
         
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+        document.addEventListener('click', (e) => this.handleDocumentClick(e));
         window.addEventListener('resize', () => this.updateBounds());
         
         const themeSelect = document.getElementById('theme');
@@ -259,6 +260,20 @@ class EyeTrainingApp {
                     this.logDiplopiaMark();
                 }
                 break;
+            case 'escape':
+                if (!this.settingsMenu.classList.contains('hidden')) {
+                    e.preventDefault();
+                    this.toggleSettings();
+                }
+                break;
+        }
+    }
+    
+    handleDocumentClick(e) {
+        if (!this.settingsMenu.classList.contains('hidden')) {
+            if (!this.settingsMenu.contains(e.target) && !this.settingsBtn.contains(e.target)) {
+                this.toggleSettings();
+            }
         }
     }
     
