@@ -8,7 +8,9 @@
 </head>
 <body>
     <div id="app">
+        <div id="gridOverlayElement" class="grid-overlay"></div>
         <div id="shape" class="shape circle"></div>
+        <div id="toastMessage" class="toast-message hidden"></div>
         
         <button id="settingsBtn" class="settings-btn" title="Settings">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -79,6 +81,65 @@
                         <input type="number" id="maxFreq" min="0.5" max="10" step="0.5" value="3">
                     </div>
                 </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Motion</h4>
+                
+                <div class="setting-item">
+                    <label for="playArea">Play area (% of viewport):</label>
+                    <input type="range" id="playArea" min="40" max="100" value="60">
+                    <span id="playAreaValue">60</span>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="axisMode">Axis mode:</label>
+                    <select id="axisMode" aria-label="Movement axis mode">
+                        <option value="free">Free</option>
+                        <option value="horizontal">Horizontal only</option>
+                        <option value="vertical">Vertical only</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item" id="circleRadiusContainer" style="display: none;">
+                    <label for="circleRadius">Circle radius (px):</label>
+                    <input type="range" id="circleRadius" min="20" max="200" value="60">
+                    <span id="circleRadiusValue">60</span>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="pauseAtTurns">Pause at turns (ms):</label>
+                    <input type="number" id="pauseAtTurns" min="0" max="500" step="50" value="200" aria-label="Pause duration at turns in milliseconds">
+                </div>
+                
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="gridOverlay" aria-label="Toggle grid overlay">
+                        Grid overlay
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Session</h4>
+                
+                <div class="setting-item">
+                    <label for="viewingDistance">Viewing distance (cm):</label>
+                    <input type="number" id="viewingDistance" min="20" max="200" step="5" value="60" aria-label="Distance from screen in centimeters">
+                </div>
+                
+                <div class="setting-item">
+                    <label for="screenPPI">Screen PPI:</label>
+                    <input type="number" id="screenPPI" min="50" max="400" step="10" value="110" aria-label="Screen pixels per inch">
+                </div>
+                
+                <div class="readout-area">
+                    <div id="currentEccentricity">Current eccentricity: 0.0°</div>
+                    <div id="lastDiplopiaMark">Last diplopia mark: -</div>
+                </div>
+                
+                <button id="exportLogBtn" type="button">Export Log (CSV)</button>
             </div>
             
             <div class="settings-footer">
